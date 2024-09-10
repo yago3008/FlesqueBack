@@ -29,10 +29,10 @@ def invite():
         return jsonify({'message': f'You are not admin in group {data["group_id"]}'}), 403
 
 
-@bp.route('/get', methods=['GET'])
+@bp.route('/get/user', methods=['GET'])
 def get_groups():
-    data = request.json
-    user_groups = get_user_groups(data['user_id'])
+    user_id = request.args.get('id', type=int)
+    user_groups = get_user_groups(user_id)
     return jsonify({'user_groups': [group for group in user_groups]})
 
 @bp.route('/define', methods=['POST'])

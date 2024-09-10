@@ -1,5 +1,6 @@
 from models.task import Task
 from models.userGroup import UserGroup
+from models.user import User
 from helper import db
 
 def create_task(title, desc, user_id, group_id):
@@ -52,6 +53,18 @@ def get_task(group_id, user_id):
     tasks = Task.query.filter_by(group_id=group_id, user_id=user_id).all()
     return [task.id for task in tasks]
 
+def get_task_bygroup(group_id):
+    tasks = Task.query.filter_by(group_id=group_id).all()
+    user_ids = [task.user_id for task in tasks]
+    users = User.query.filter(User.id.in_(user_ids)).all()
+
+    user_dict = {user.id: user for user in users} 
+    tasks_data = [
+        task.to_json(user_dict.get(task.user_id))
+        for task in tasks
+    ]
+
+    return [task for task in tasks_data]
 
     
 

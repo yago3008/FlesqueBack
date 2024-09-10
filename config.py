@@ -1,4 +1,4 @@
 class Config:
-    SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://flask:flask@localhost/flask'
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///flesque.db'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SECRET_KEY = 'flesque'
