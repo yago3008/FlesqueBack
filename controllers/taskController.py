@@ -7,13 +7,19 @@ bp = Blueprint('task', __name__)
 @bp.route('/create', methods=['POST'])
 def create():
     data = request.json
-    task = create_task(data['title'], data['desc'], data['user_id'], data['group_id'])
-    return jsonify({'Message': task.to_json('')})
+    print(data)
+    task = create_task(data['title'], data['desc'], data['user_name'], data['group_id'])
+    print(task.title + task.desc)
+    return jsonify({'Message': task.to_json()})
 
-@bp.route('/delete', methods=['DELETE'])
+@bp.route('/delete', methods=['POST'])
 def delete():
     data = request.json
-    return jsonify({'Message': f'{delete_task(data['task_id'], session['cookie'])}'})
+    response = delete_task(data['task_id'], data['user_id'])
+    if(response == None):
+        return jsonify({'Message': 'Error deleting task'}), 403
+    
+    return jsonify({'Message': 'Success deleting taks'}), 200
 
 @bp.route('/update', methods=['PUT'])
 def update():

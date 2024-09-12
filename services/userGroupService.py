@@ -12,11 +12,9 @@ def invite_user(user_id, group_id):
 def get_user_groups(user_id):
     user_groups = UserGroup.query.filter_by(user_id=user_id).all()
     group_ids = [user_group.group_id for user_group in user_groups]
-    groups = Group.query.filter(Group.group_id.in_(group_ids)).all()
+    groups = Group.query.filter(Group.group_id.in_(group_ids)).join(User).add_entity(User).all()
 
-    group_data = list(map(lambda g: g.to_json(), groups))
-
-    return [group for group in group_data]
+    return [{ "group": group[0].to_json(), "user": group[1].to_json() } for group in groups]
 
 def to_json(self):
     return{

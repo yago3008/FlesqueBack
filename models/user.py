@@ -1,5 +1,7 @@
 from helper import db
+from dataclasses import dataclass
 
+@dataclass
 class User(db.Model):
     __tablename__ = 'users'
 

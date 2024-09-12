@@ -1,5 +1,7 @@
 from helper import db
+from dataclasses import dataclass
 
+@dataclass
 class Task(db.Model):
     __tablename__ = 'task'
 
@@ -10,7 +12,7 @@ class Task(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     status_id = db.Column(db.Integer, db.ForeignKey('status.status_id'))
 
-    def to_json(self, user_fullname):
+    def to_json(self):
         return{
 
             'task_id': self.task_id,
@@ -18,7 +20,6 @@ class Task(db.Model):
             'desc': self.desc,
             'group_id': self.group_id,
             'user_id': self.user_id,
-            'user_fullname': user_fullname,
             'status_id': self.status_id,
         }
 
