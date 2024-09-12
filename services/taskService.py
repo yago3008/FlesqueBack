@@ -56,11 +56,7 @@ def get_task(group_id, user_id):
 
 def get_task_bygroup(group_id):
     tasks = Task.query.filter_by(group_id=group_id).join(User).add_entity(User).all()
-
     return [{ "task": task[0].to_json(), "user": task[1].to_json() } for task in tasks]
 
-    
-
-
-
-
+def get_task_by_id(task_id):
+    return Task.query.get(task_id)

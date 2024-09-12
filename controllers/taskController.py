@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify, session
 from models.task import Task
-from services.taskService import create_task,delete_task, update_task, update_status_id, get_task_bygroup
+from services.taskService import create_task,delete_task, update_task, update_status_id, get_task_bygroup, get_task_by_id
 
 bp = Blueprint('task', __name__)
 
@@ -33,4 +33,9 @@ def get():
     tasks = get_task_bygroup(group_id)
     return jsonify({'group_tasks': [task for task in tasks]})
 
-
+@bp.route('/', methods=['GET'])
+def getOne():
+    task_id = request.args.get('id', type=int)
+    task = get_task_by_id(task_id)
+    print(task)
+    return jsonify({'task': task.to_json()})
