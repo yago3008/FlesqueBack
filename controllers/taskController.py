@@ -7,8 +7,8 @@ bp = Blueprint('task', __name__)
 @bp.route('/create', methods=['POST'])
 def create():
     data = request.json
-    task = create_task(data['title'], data['desc'], session['cookie'], data['group_id'])
-    return jsonify({'Message': task.to_json()})
+    task = create_task(data['title'], data['desc'], data['user_id'], data['group_id'])
+    return jsonify({'Message': task.to_json('')})
 
 @bp.route('/delete', methods=['DELETE'])
 def delete():

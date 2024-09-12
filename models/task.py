@@ -20,7 +20,6 @@ class Task(db.Model):
             'user_id': self.user_id,
             'user_fullname': user_fullname,
             'status_id': self.status_id,
-
         }
 
     def __repr__(self):

@@ -12,7 +12,7 @@ bp1 = Blueprint('userGroup', __name__)
 @bp.route('/create', methods=['POST'])
 def create():
     data = request.json
-    group = create_group(data['name'], session['cookie'])
+    group = create_group(data['name'], data['admin_id'])
     if not group:
         return jsonify({'message': 'Create failed'}), 404
     return jsonify({'group': group.to_json()})

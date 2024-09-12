@@ -58,15 +58,13 @@ def get_task_bygroup(group_id):
     user_ids = [task.user_id for task in tasks]
     users = User.query.filter(User.id.in_(user_ids)).all()
     user_dict = {user.id: user for user in users}
+    print(user_dict[1])
 
-    # task_data = []
-    # for task, user in tasks, users:
-    #     task_data.append(task.to_json(user.fullname))
-    
-    
-    # oi mo corrige
+    task_data = []
+    for task, user in zip(tasks, users):
+        task_data.append(task.to_json(user.fullname))
 
-    return [task for task in tasks_data]
+    return [task for task in task_data]
 
     
 
