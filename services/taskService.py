@@ -1,6 +1,7 @@
 from models.task import Task
 from models.user import User
 from models.group import Group
+from models.status import Status
 from helper import db
 from flask import jsonify
 
@@ -54,8 +55,18 @@ def get_task(group_id, user_id):
     tasks = Task.query.filter_by(group_id=group_id, user_id=user_id).all()
     return [task.id for task in tasks]
 
-def get_task_bygroup(group_id):
-    tasks = Task.query.filter_by(group_id=group_id).join(User).add_entity(User).all()
+def get_task_bygroup(group_id, filter):
+    print(type(filter), filter)
+    if filter == 'Sem filtro':
+        tasks = Task.query.filter_by(group_id=group_id).join(User).add_entity(User).all()
+        print(group_id)
+        print(tasks)
+        print("aqqui")
+    else:
+        print("aqqui naoooo")
+        status = Status.query.filter_by(current=filter).first()
+        tasks = Task.query.filter_by(group_id=group_id, status_id=status.status_id).join(User).add_entity(User).all()
+
     return [{ "task": task[0].to_json(), "user": task[1].to_json() } for task in tasks]
 
 def get_task_by_id(task_id):

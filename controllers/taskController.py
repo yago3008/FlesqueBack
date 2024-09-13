@@ -30,7 +30,8 @@ def update():
 @bp.route('/group', methods=['GET'])
 def get():
     group_id = request.args.get('id', type=int)
-    tasks = get_task_bygroup(group_id)
+    filter = request.args.get('filter', type=str)
+    tasks = get_task_bygroup(group_id, filter)
     return jsonify({'group_tasks': [task for task in tasks]})
 
 @bp.route('/', methods=['GET'])
