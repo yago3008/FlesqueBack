@@ -39,3 +39,10 @@ def getOne():
     task = get_task_by_id(task_id)
     print(task)
     return jsonify({'task': task.to_json()})
+
+@bp.route('/updateStatus', methods=['PUT'])
+def update_status():
+    data = request.json
+    print(data)
+    update_status_id(data['task_id'], data['status_id'])
+    return jsonify({'Message': f'Updated task {data["task_id"]}'})
