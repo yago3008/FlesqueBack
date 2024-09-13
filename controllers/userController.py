@@ -23,6 +23,11 @@ def manage_user(id):
 @bp.route('/login', methods=['POST'])
 def login():
     return login_controller()
+
+@bp.route('/getAll', methods=['GET'])
+def get_all():
+    users = get_all_users()
+    return jsonify({'users': [user.to_json() for user in users]})
 # =========================== ROTAS ===========================
 
 
@@ -63,5 +68,8 @@ def login_controller():
         return jsonify({'message': f'Logged in successfully, session: {session["cookie"]}', 'obj': user_session.to_json()})
     else:
         return jsonify({'message': 'Invalid credentials'}), 401
+    
+def get_all_users():
+    return User.query.all()
 
 # ======================== FUNCOES ============================
