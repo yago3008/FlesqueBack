@@ -7,13 +7,12 @@ from controllers.groupController import bp as group_bp, bp1 as userGroup_bp
 from controllers.statusController import bp as status_bp
 from controllers.taskController import bp as task_bp
 
-
 def create_bps(app):
     pass
 
 def create_app():
     app = Flask(__name__)
-    CORS(app, resources={r"/*": {"origins": "http://localhost:5174"}})
+    CORS(app, resources={r"/*": {"origins": "http://localhost:5173"}})
     app.config.from_object(Config)
     db.init_app(app)
     create_bps(app)
@@ -23,8 +22,6 @@ def create_app():
     app.register_blueprint(task_bp, url_prefix='/task') 
     app.register_blueprint(userGroup_bp, url_prefix='/user_group')
     return app
-
-
 
 if __name__ == '__main__': 
     app = create_app()

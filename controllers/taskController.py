@@ -38,7 +38,10 @@ def get():
 def getOne():
     task_id = request.args.get('id', type=int)
     task = get_task_by_id(task_id)
-    print(task)
+
+    if(task == None):
+        return jsonify({'Message': f'No such task with id:{task_id}'})
+    
     return jsonify({'task': task.to_json()})
 
 @bp.route('/updateStatus', methods=['PUT'])

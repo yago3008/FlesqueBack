@@ -32,6 +32,7 @@ def update_task(id, title=None, desc=None):
     
     if title:
         task.title = title
+
     if desc:
         task.desc = desc
 
