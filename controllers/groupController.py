@@ -20,7 +20,7 @@ def create():
 @bp.route('/invite', methods=['POST'])
 def invite():
     data = request.json
-    if verify_admin(data['group_id'], session['cookie']):
+    if verify_admin(data['group_id'], data['curr_user_id']):
         user_invited = invite_user(data['user_id'], data['group_id'])
         if not user_invited:
             return jsonify({'message': 'Invite failed'}), 404

@@ -11,7 +11,7 @@ def create_group(name, admin_id):
 
 def verify_admin(group_id, admin_id):
     group = Group.query.filter_by(group_id=group_id).first()
-    if group and group.admin_id == admin_id:
+    if group and group.admin_id == int(admin_id):
         return True
     return False
 
