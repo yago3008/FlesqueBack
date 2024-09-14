@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify, session
 from models.task import Task
-from services.taskService import create_task,delete_task, update_task, update_status_id, get_task_bygroup, get_task_by_id
+from services.taskService import create_task,delete_task, update_task, update_status_id, get_task_bygroup, get_task_by_id, create_all_status
 
 bp = Blueprint('task', __name__)
 
@@ -50,3 +50,8 @@ def update_status():
     print(data)
     update_status_id(data['task_id'], data['status_id'])
     return jsonify({'Message': f'Updated task {data["task_id"]}'})
+
+@bp.route('/status/create', methods=['GET'])
+def create_status():
+    create_all_status()
+    return jsonify({'Message': 'Status created.'})

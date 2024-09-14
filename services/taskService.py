@@ -72,3 +72,12 @@ def get_task_bygroup(group_id, filter):
 
 def get_task_by_id(task_id):
     return Task.query.get(task_id)
+
+def create_all_status():
+    task1 = Status(current='A fazer')
+    task2 = Status(current='Em andamento')
+    task3 = Status(current='Finalizado')
+    db.session.add(task1)
+    db.session.add(task2)
+    db.session.add(task3)
+    db.session.commit()

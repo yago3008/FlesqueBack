@@ -7,6 +7,7 @@ from controllers.groupController import bp as group_bp, bp1 as userGroup_bp
 from controllers.statusController import bp as status_bp
 from controllers.taskController import bp as task_bp
 
+
 def create_bps(app):
     pass
 

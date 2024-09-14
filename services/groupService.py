@@ -20,4 +20,3 @@ def define_group(group_id):
    return session['group_id']
 
 
-
